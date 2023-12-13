@@ -40,7 +40,7 @@ const port =
 
 dbConnect()
   .then((res) => {
-    console.log(`db connection sccessful`.bgCyan);
+    console.log(`db connection successful`.bgCyan);
 
     // listen on port
     app.listen(port, (err) => {

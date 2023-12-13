@@ -1,5 +1,7 @@
 import UserModel from "../../models/User.js";
 import httpStatus from "http-status";
+import bcrypt from "bcrypt";
+import { jwtToken } from "../../util/generateToken.js";
 
 export const createUser = async (req, res) => {
   const data = req.body;
@@ -10,6 +12,7 @@ export const createUser = async (req, res) => {
         status: "error",
         data: "user with username exists",
       });
+
       return;
     }
 
@@ -24,11 +27,14 @@ export const createUser = async (req, res) => {
       return;
     }
 
+    const saltrounds = 10;
+    const passwordHash = await bcrypt.hash(data.password, saltrounds);
+
     const newUser = await UserModel.create({
       username: data.username,
       email: data.email,
       role: data.role,
-      password: data.password,
+      password: passwordHash,
     });
 
     res.status(httpStatus.CREATED).json({
@@ -52,7 +58,37 @@ export const getUsers = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
-  const { username, password, email } = req.body;
+  const data = req.body;
+
+  const userExist = await UserModel.findOne({ email: data.email });
+  if (!userExist) {
+    res.status(httpStatus.BAD_REQUEST).json({
+      status: "error",
+      data: "No user with the email exists.",
+    });
+  }
+
+  const comparePasswords = async (plain, hashed) => {
+    return bcrypt.compare(plain, hashed);
+  };
+
+  const checkPassword = await comparePasswords(
+    data.password,
+    userExist.password
+  );
+  if (!checkPassword) {
+    res.status(httpStatus.BAD_REQUEST).json({
+      status: "error",
+      message: "Password is incorrect",
+    });
+    return;
+  }
+
+  res.status(httpStatus.OK).json({
+    status: "success",
+    data: userExist,
+    token: jwtToken(userExist._id, userExist.email),
+  });
 };
 
 export const getSingleUser = async (req, res) => {
@@ -74,3 +110,19 @@ export const getSingleUser = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {};
+
+export const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleteUser = await UserModel.findOneAndDelete({ _id: id });
+    res.status(httpStatus.OK).json({
+      status: "succes",
+      data: "user successfully deleted:" + deleteUser,
+    });
+  } catch (error) {
+    res.status(httpStatus.BAD_REQUEST).json({
+      status: "error",
+      data: error.message,
+    });
+  }
+};
