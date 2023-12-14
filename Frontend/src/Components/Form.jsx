@@ -1,4 +1,5 @@
-import Input from "./Input.jsx";
+import Input from "./Inputs/Input.jsx";
+import logo from "../assets/Icons/Logos/bookwarm_logo.png";
 
 const Form = () => {
   return (
@@ -75,10 +76,10 @@ const Form = () => {
             <div className="mb-10 flex flex-shrink-0 flex-grow-0 items-center justify-center overflow-hidden">
               <a
                 href="#"
-                className="flex cursor-pointer items-center gap-2 text-indigo-500 no-underline hover:text-indigo-500"
+                className="flex cursor-pointer items-center gap-2 text-accent no-underline hover:text-accent/80 trans"
               >
                 <span className="flex-shrink-0 text-3xl font-black lowercase tracking-tight opacity-100">
-                  Bookwarm.
+                  <img src={logo} alt="" width={180} />
                 </span>
               </a>
             </div>
@@ -97,7 +98,7 @@ const Form = () => {
               {/* button */}
               <div className="mb-4 mt-8">
                 <button
-                  className="grid w-full cursor-pointer select-none rounded-md border border-indigo-500 bg-indigo-500 py-2 px-5 text-center align-middle text-sm text-white shadow hover:border-indigo-600 hover:bg-indigo-600 hover:text-white focus:border-indigo-600 focus:bg-indigo-600 focus:text-white focus:shadow-none"
+                  className="grid w-full cursor-pointer select-none rounded-md border border-accent bg-accent py-2 px-5 text-center align-middle text-sm text-white shadow hover:border-accent hover:bg-accent/90 hover:text-white focus:border-accent focus:bg-accent/90 focus:text-white focus:shadow-none trans"
                   type="submit"
                 >
                   Sign in
@@ -109,7 +110,7 @@ const Form = () => {
               New on futurism?
               <a
                 href="#"
-                className="cursor-pointer text-indigo-500 no-underline hover:text-indigo-500"
+                className="cursor-pointer text-accent no-underline hover:text-accent/80 trans"
               >
                 {" "}
                 Create an account{" "}
