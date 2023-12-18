@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
 import JWT from "jsonwebtoken";
-import UserModel from "../models/User";
+import UserModel from "../models/User.js";
 
 export const verifyUser = async (req, res, next) => {
   if (

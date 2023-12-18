@@ -22,6 +22,8 @@
   "author": "Kelvin Okpara",
   "license": "ISC",
   "dependencies": {
+    "@redux-devtools/extension": "^3.3.0",
+    "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
@@ -31,7 +33,11 @@
     "joi": "^17.11.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.6.1",
-    "otp-generator": "^4.0.1"
+    "otp-generator": "^4.0.1",
+    "react-redux": "^9.0.4",
+    "react-toastify": "^9.1.3",
+    "redux": "^5.0.0",
+    "redux-thunk": "^3.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
