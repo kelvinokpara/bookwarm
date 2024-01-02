@@ -1,13 +1,26 @@
+import { useEffect } from "react";
 import BookCard from "../Components/BookCard";
 import Search from "../Components/Inputs/Search";
-import Navbar from "../Components/Navbar";
+// import Navbar from "../Components/Navbar";
 import Tabs from "../Components/Tabs";
+import { useDispatch, useSelector } from "react-redux";
+import { getBooksAction } from "../Redux/Actions/booksAction";
 
 const Homepage = () => {
+  const { getBooks } = useSelector((state) => state);
   const bookArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getBooksAction());
+  }, []);
+
+  getBooks.success ? console.log(getBooks, "gb") : console.log(null);
+
+  const { Books } = getBooks;
   return (
     <div className="pb-20">
-      <Navbar />
+      {/* <Navbar /> */}
 
       {/*  */}
       <div>
@@ -45,9 +58,8 @@ const Homepage = () => {
       </div>
       {/*  */}
       <div className="px-10 max-md:px-4 py-10 flex justify-center flex-wrap">
-        {bookArray.map((book) => (
-          <BookCard key={book} />
-        ))}
+        {getBooks.success &&
+          Books.map((book, index) => <BookCard key={index} bookData={book} />)}
       </div>
     </div>
   );

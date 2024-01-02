@@ -6,7 +6,7 @@ const UserSchema = mongoose.Schema(
       type: String,
       unique: true,
       min: 6,
-      max: 12,
+      max: 26,
       required: [true, "Please supply the username"],
     },
     email: {

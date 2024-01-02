@@ -24,7 +24,7 @@ const router = express.Router();
 router
   .route("/")
   .get(verifyUser, authorizeUser(["admin", "regular"]), getUsers)
-  .post(createUser);
+  .post(validationMiddleware(createUserSchema), createUser);
 
 router.route("/login").post(validationMiddleware(loginUserSchema), loginUser);
 

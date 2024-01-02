@@ -23,7 +23,7 @@ export const validationMiddleware = (schema, type) => {
         return;
       }
 
-      const value = await schema.validateAsync(req.params, validationOptions);
+      const value = await schema.validateAsync(req.body, validationOptions);
       req.body = value;
       next();
     } catch (error) {

@@ -6,5 +6,5 @@ import JWT from "jsonwebtoken";
 const { JWT_SECRET, JWT_EXPIRY } = process.env;
 
 export const jwtToken = (id, email) => {
-  JWT.sign({ id, email }, JWT_SECRET, { expiresIn: JWT_EXPIRY });
+  return JWT.sign({ id, email }, JWT_SECRET, { expiresIn: JWT_EXPIRY });
 };

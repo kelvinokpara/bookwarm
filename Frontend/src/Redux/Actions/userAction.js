@@ -9,10 +9,9 @@ import {
   LOGIN_USER_ERROR,
   LOGIN_USER_RESET,
   //
-  GET_USERS_REQUEST,
-  GET_USERS_SUCCESS,
-  GET_USERS_ERROR,
-  GET_USERS_RESET,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_ERROR,
 } from "../Constants";
 
 import { toast } from "react-toastify";
@@ -46,14 +45,16 @@ export const loginUserAction = (BodyData) => async (dispatch, state) => {
     );
 
     //if we get here, then request is a success case
-    const userInfo = { ...data.payload, token: data.token };
+    const userInfo = { ...data.data, token: data.token };
     dispatch({
       type: LOGIN_USER_SUCCESS,
       payload: userInfo,
     });
+    console.log(userInfo);
 
     //persist user login detail in local storage
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    toast.success("User logged in");
   } catch (error) {
     let message =
       error.response && error.response.data.errors
@@ -66,10 +67,11 @@ export const loginUserAction = (BodyData) => async (dispatch, state) => {
       type: LOGIN_USER_ERROR,
       payload: message,
     });
+    toast.error(message);
   }
 };
 
-export const logout = () => async (dispatch, state) => {
+export const logoutUserAction = () => async (dispatch, state) => {
   console.log("loogged out");
   dispatch({ type: LOGIN_USER_RESET });
   localStorage.setItem("userInfo", null);
@@ -91,7 +93,7 @@ export const createUserAction = (BodyData) => async (dispatch, state) => {
     const { data } = await axios.post(
       `${backend_base_url}/users`,
       {
-        BodyData,
+        ...BodyData,
       },
       config
     );
@@ -101,6 +103,7 @@ export const createUserAction = (BodyData) => async (dispatch, state) => {
       type: CREATE_USER_SUCCESS,
       payload: data.payload,
     });
+    toast.success("Sign up complete. please proceed to sign in.");
   } catch (error) {
     let message =
       error.response && error.response.data.errors
@@ -110,8 +113,9 @@ export const createUserAction = (BodyData) => async (dispatch, state) => {
         : error.message;
     console.log(message, "error");
     dispatch({
-      type: LOGIN_USER_ERROR,
+      type: CREATE_USER_ERROR,
       payload: message,
     });
+    toast.error(message);
   }
 };

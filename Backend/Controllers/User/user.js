@@ -85,7 +85,7 @@ export const loginUser = async (req, res) => {
   }
 
   res.status(httpStatus.OK).json({
-    status: "success",
+    status: "successes",
     data: userExist,
     token: jwtToken(userExist._id, userExist.email),
   });

@@ -1,7 +1,70 @@
+import { useNavigate, useParams } from "react-router-dom";
+
 import Input from "./Inputs/Input.jsx";
 import logo from "../assets/Icons/Logos/bookwarm_logo.png";
+import { useState, useEffect } from "react";
+import {
+  createUserAction,
+  loginUserAction,
+} from "../Redux/Actions/userAction.js";
+import { useDispatch, useSelector } from "react-redux";
+import { useCallback } from "react";
 
 const Form = () => {
+  const [inputValue, setInputValue] = useState({});
+
+  // dispatch hook and useSelector
+  const dispatch = useDispatch();
+  const { createUser, loginUser } = useSelector((state) => state);
+
+  // navigate hook from react-router-dom
+  const navigate = useNavigate();
+
+  const changeFunc = (e) => {
+    // const { name, value } = e.target;
+    console.log(e.target.value, "target value");
+    setInputValue((prevVal) => ({
+      ...prevVal,
+      [e.target.name]: e.target.value,
+    }));
+    console.log(inputValue, "input value object");
+  };
+
+  // getting parameters from route
+  const { id } = useParams();
+  console.log(id, "route");
+
+  const navigateHandler = useCallback(() => {
+    {
+      id === ":register"
+        ? navigate("/accounts/:login")
+        : id === ":login"
+        ? navigate("/accounts/:register")
+        : "";
+    }
+  }, [navigate, id]);
+
+  const registerHandler = () => {
+    dispatch(createUserAction(inputValue));
+  };
+
+  const loginHandler = () => {
+    const user = { email: inputValue.email, password: inputValue.password };
+    dispatch(loginUserAction(user));
+    console.log(loginUser);
+  };
+
+  // use effect
+  useEffect(() => {
+    if (createUser.success) {
+      navigateHandler();
+    }
+
+    if (loginUser.success) {
+      navigate("/");
+    }
+  }, [createUser.success, loginUser.success, navigate, navigateHandler]);
+
   return (
     <div className="flex min-h-screen w-full items-center justify-center text-gray-600 bg-gray-50">
       <div className="relative">
@@ -85,37 +148,87 @@ const Form = () => {
             </div>
             {/* <!-- /Logo --> */}
             <h4 className="mb-2 font-medium text-gray-700 xl:text-xl">
-              Welcome to Bookwarm!
+              {id === ":register"
+                ? "Welcome to Bookwarm!"
+                : id === "login"
+                ? "Sign in to Bookwarm!"
+                : ""}
             </h4>
             <p className="mb-6 text-gray-500 text-xs">
               Your best online library platform for anything knowledge-based
             </p>
 
-            <form id="" className="mb-4 ">
-              <Input type={"text"} typeText={"full name"} />
-              <Input type={"email"} typeText={"email address"} />
-              <Input type={"password"} typeText={"password"} />
+            <div id="" className="mb-4 ">
+              {id === ":register" && (
+                <Input
+                  type={"text"}
+                  typeText={"full name"}
+                  name={"username"}
+                  value={inputValue}
+                  setInputValue={changeFunc}
+                />
+              )}
+              <Input
+                type={"email"}
+                typeText={"email address"}
+                name={"email"}
+                value={inputValue}
+                setInputValue={changeFunc}
+              />
+              <Input
+                type={"password"}
+                typeText={"password"}
+                name={"password"}
+                value={inputValue}
+                setInputValue={changeFunc}
+              />
               {/* button */}
               <div className="mb-4 mt-8">
                 <button
                   className="grid w-full cursor-pointer select-none rounded-md border border-accent bg-accent py-2 px-5 text-center align-middle text-sm text-white shadow hover:border-accent hover:bg-accent/90 hover:text-white focus:border-accent focus:bg-accent/90 focus:text-white focus:shadow-none trans"
-                  type="submit"
+                  onClick={
+                    id === ":register"
+                      ? registerHandler
+                      : id === ":login"
+                      ? loginHandler
+                      : ""
+                  }
                 >
-                  Sign in
+                  {id === ":register"
+                    ? "Sign Up"
+                    : id === ":login"
+                    ? "Sign In"
+                    : ""}
                 </button>
               </div>
-            </form>
+            </div>
 
-            <p className="mb-4 text-center">
-              New on futurism?
-              <a
-                href="#"
-                className="cursor-pointer text-accent no-underline hover:text-accent/80 trans"
-              >
-                {" "}
-                Create an account{" "}
-              </a>
-            </p>
+            {id === ":register" ? (
+              <p className="mb-4 text-center">
+                Already have an account?
+                <span
+                  className="cursor-pointer text-accent no-underline hover:text-accent/80 trans"
+                  onClick={navigateHandler}
+                >
+                  {" "}
+                  sign in{" "}
+                </span>
+              </p>
+            ) : id === ":login" ? (
+              <p className="mb-4 text-center">
+                New on Bookwarm?
+                <span
+                  className="cursor-pointer text-accent no-underline hover:text-accent/80 trans"
+                  onClick={navigateHandler}
+                >
+                  {" "}
+                  Create an account{" "}
+                </span>
+              </p>
+            ) : (
+              ""
+            )}
+            {/*  */}
           </div>
         </div>
         {/* <!-- /Register --> */}
