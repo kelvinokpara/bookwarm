@@ -25,6 +25,8 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
   UPDATE_USER_RESET,
+  LOGGED,
+  UNLOGGED,
 } from "../Constants";
 
 const userLocalInfo = localStorage.getItem("userInfo")
@@ -180,11 +182,22 @@ export const updateUserReducer = (
     case UPDATE_USER_RESET:
       return {
         ...state,
-        uesr: null,
+        user: null,
         loading: false,
         success: false,
         error: null,
       };
+    default:
+      return state;
+  }
+};
+
+export const loginStatusReducer = (state = { status: null }, action) => {
+  switch (action.type) {
+    case LOGGED:
+      return { status: true };
+    case UNLOGGED:
+      return { status: false };
     default:
       return state;
   }

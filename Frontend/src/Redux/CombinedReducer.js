@@ -10,6 +10,7 @@ import {
   getBookReducer,
   getBooksReducer,
   deleteBookReducer,
+  loginStatusReducer,
 } from "./Reducers";
 
 export const Reducers = combineReducers({
@@ -23,4 +24,5 @@ export const Reducers = combineReducers({
   getBook: getBookReducer,
   getBooks: getBooksReducer,
   deleteBook: deleteBookReducer,
+  loginStatus: loginStatusReducer,
 });

@@ -16,14 +16,7 @@ const Router = () => {
           </Layout>
         }
       />
-      <Route
-        path={"/accounts"}
-        element={
-          <ToastLayout>
-            <Accounts />
-          </ToastLayout>
-        }
-      />
+
       <Route
         path={"/accounts/:id"}
         element={

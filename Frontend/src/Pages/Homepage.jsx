@@ -5,6 +5,7 @@ import Search from "../Components/Inputs/Search";
 import Tabs from "../Components/Tabs";
 import { useDispatch, useSelector } from "react-redux";
 import { getBooksAction } from "../Redux/Actions/booksAction";
+import { LOGGED } from "../Redux/Constants";
 
 const Homepage = () => {
   const { getBooks } = useSelector((state) => state);
@@ -13,6 +14,7 @@ const Homepage = () => {
 
   useEffect(() => {
     dispatch(getBooksAction());
+    dispatch({ type: LOGGED });
   }, []);
 
   getBooks.success ? console.log(getBooks, "gb") : console.log(null);

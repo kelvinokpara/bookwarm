@@ -54,7 +54,7 @@ export const loginUserAction = (BodyData) => async (dispatch, state) => {
 
     //persist user login detail in local storage
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
-    toast.success("User logged in");
+    // toast.success("User logged in");
   } catch (error) {
     let message =
       error.response && error.response.data.errors
@@ -72,7 +72,7 @@ export const loginUserAction = (BodyData) => async (dispatch, state) => {
 };
 
 export const logoutUserAction = () => async (dispatch, state) => {
-  console.log("loogged out");
+  console.log("logged out");
   dispatch({ type: LOGIN_USER_RESET });
   localStorage.setItem("userInfo", null);
   toast.success("logged out");
@@ -103,7 +103,6 @@ export const createUserAction = (BodyData) => async (dispatch, state) => {
       type: CREATE_USER_SUCCESS,
       payload: data.payload,
     });
-    toast.success("Sign up complete. please proceed to sign in.");
   } catch (error) {
     let message =
       error.response && error.response.data.errors
@@ -119,3 +118,7 @@ export const createUserAction = (BodyData) => async (dispatch, state) => {
     toast.error(message);
   }
 };
+
+// export const userLogStatus = (BodyData) => (dispatch, state) =>{
+
+// }

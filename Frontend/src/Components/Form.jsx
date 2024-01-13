@@ -9,6 +9,13 @@ import {
 } from "../Redux/Actions/userAction.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback } from "react";
+import { toast } from "react-toastify";
+
+// reducer constants
+import {
+  CREATE_USER_RESET,
+  LOGIN_USER_RESET,
+} from "../Redux/Constants/userContants.js";
 
 const Form = () => {
   const [inputValue, setInputValue] = useState({});
@@ -34,7 +41,7 @@ const Form = () => {
   const { id } = useParams();
   console.log(id, "route");
 
-  const navigateHandler = useCallback(() => {
+  const navigateHandler = () => {
     {
       id === ":register"
         ? navigate("/accounts/:login")
@@ -42,7 +49,7 @@ const Form = () => {
         ? navigate("/accounts/:register")
         : "";
     }
-  }, [navigate, id]);
+  };
 
   const registerHandler = () => {
     dispatch(createUserAction(inputValue));
@@ -57,13 +64,21 @@ const Form = () => {
   // use effect
   useEffect(() => {
     if (createUser.success) {
-      navigateHandler();
+      toast.success("Sign up complete. please proceed to sign in.");
+      setTimeout(() => {
+        navigate("/accounts/:login");
+      }, 3000);
+      dispatch({ type: CREATE_USER_RESET });
     }
 
     if (loginUser.success) {
-      navigate("/");
+      toast.success("user logged in");
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+      dispatch({ type: LOGIN_USER_RESET });
     }
-  }, [createUser.success, loginUser.success, navigate, navigateHandler]);
+  }, [createUser.success, loginUser.success, navigate, dispatch]);
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center text-gray-600 bg-gray-50">
