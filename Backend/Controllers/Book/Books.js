@@ -24,7 +24,7 @@ export const createBook = async (req, res) => {
     category: data.category,
   });
 
-  res.status(httpStatus.OK).json({
+  res.status(httpStatus.CREATED).json({
     status: "success",
     data: createdBook,
   });

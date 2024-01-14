@@ -1,7 +1,6 @@
 import Joi from "joi";
 
 export const CreateBookSchema = Joi.object({
-  id: Joi.number().required(),
   title: Joi.string().required(),
   subtitle: Joi.string().required(),
   authors: Joi.string().required(),
