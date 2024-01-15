@@ -7,21 +7,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBooksAction } from "../Redux/Actions/booksAction";
 // import { LOGGED } from "../Redux/Constants";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { searchBooksAction } from "../Redux/Actions/searchAction";
 
 const Homepage = () => {
-  const { getBooks } = useSelector((state) => state);
+  const { getBooks, searchBooks } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const userStatus = localStorage.getItem("userInfo");
-  console.log(userStatus);
+  // console.log(userStatus);
 
   useEffect(() => {
     dispatch(getBooksAction());
+    dispatch(searchBooksAction(""));
   }, []);
+  console.log(searchBooks, "SB");
 
   getBooks.success ? console.log(getBooks, "gb") : console.log(null);
 
   const { Books } = getBooks;
+  const { result } = searchBooks;
   return (
     <div className="pb-20">
       {/* <Navbar /> */}
@@ -64,10 +68,14 @@ const Homepage = () => {
       <div className="px-10 max-md:px-4 py-10">
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 4, 900: 5 }}>
           <Masonry>
-            {getBooks.success &&
-              Books.map((book, index) => (
-                <BookCard key={index} bookData={book} />
-              ))}
+            {searchBooks.success
+              ? result.map((book, index) => (
+                  <BookCard key={index} bookData={book} />
+                ))
+              : getBooks.success &&
+                Books.map((book, index) => (
+                  <BookCard key={index} bookData={book} />
+                ))}
           </Masonry>
         </ResponsiveMasonry>
       </div>

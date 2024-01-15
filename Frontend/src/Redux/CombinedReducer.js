@@ -11,6 +11,7 @@ import {
   getBooksReducer,
   deleteBookReducer,
   loginStatusReducer,
+  SearchBooksReducer,
 } from "./Reducers";
 
 export const Reducers = combineReducers({
@@ -25,4 +26,5 @@ export const Reducers = combineReducers({
   getBooks: getBooksReducer,
   deleteBook: deleteBookReducer,
   loginStatus: loginStatusReducer,
+  searchBooks: SearchBooksReducer,
 });

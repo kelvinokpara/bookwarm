@@ -1,4 +1,24 @@
+import { useDispatch, useSelector } from "react-redux";
+import { searchBooksAction } from "../../Redux/Actions/searchAction";
+import { useEffect, useState } from "react";
+import { SEARCH_BOOKS_RESET } from "../../Redux/Constants/searchConstant";
+
 const Search = () => {
+  const dispatch = useDispatch();
+  const [searchValue, setSearchValue] = useState("");
+  console.log(searchValue);
+
+  // useEffect(() => {
+  //   if (searchValue == "") {
+  //     dispatch(SEARCH_BOOKS_RESET);
+  //   }
+  // }, [searchValue, dispatch]);
+
+  const searchHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(searchBooksAction(searchValue));
+  };
   return (
     <div className="mx-auto mt-5 w-screen max-w-screen-md py-20 leading-6">
       <form className="relative mx-auto flex w-full max-w-2xl items-center justify-between rounded-md border shadow-lg">
@@ -22,10 +42,13 @@ const Search = () => {
           name="search"
           className="h-14 w-full rounded-md py-4 pr-40 pl-12 outline-none focus:ring-2"
           placeholder="Search for a book..."
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
         />
         <button
           type="submit"
           className="absolute right-0 mr-1 inline-flex h-12 items-center justify-center rounded-lg bg-accent px-10 font-medium text-white focus:ring-4 hover:bg-accent/90 trans"
+          onClick={(e) => searchHandler(e)}
         >
           Search
         </button>

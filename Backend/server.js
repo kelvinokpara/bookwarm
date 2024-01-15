@@ -8,6 +8,7 @@ import { dbConnect } from "./config/db.js";
 
 import BookRoutes from "../Backend/Routes/Book.js";
 import UserRoutes from "../Backend/Routes/User.js";
+import SearchRoutes from "../Backend/Routes/Search.js";
 
 dotenv.config();
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.json());
 // initialization of routes
 app.use("/books", BookRoutes);
 app.use("/users", UserRoutes);
+app.use("/search", SearchRoutes);
 
 // initial http request from endpoint
 app.get("/", (req, res) => {
