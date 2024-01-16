@@ -7,16 +7,19 @@ import {
 
 import axios from "axios";
 
-// const backend_base_url = "http://localhost:9000";
+const backend_base_url = "http://localhost:9000";
 
 export const searchBooksAction = (BodyData) => async (dispatch, state) => {
   try {
     dispatch({ type: SEARCH_BOOKS_REQUEST });
-    const { data } = axios.get("http://localhost:9000/search?key=k");
-    console.log(data, "search data");
+    const { data } = await axios.get(
+      `${backend_base_url}/search?key=${BodyData}`
+    );
+    const payload = data;
+    console.log(payload.data, "search data");
     dispatch({
       type: SEARCH_BOOKS_SUCCESS,
-      payload: data,
+      payload: payload.data,
     });
   } catch (error) {
     let message =

@@ -22,7 +22,7 @@ const Homepage = () => {
   }, []);
   console.log(searchBooks, "SB");
 
-  getBooks.success ? console.log(getBooks, "gb") : console.log(null);
+  // getBooks.success ? console.log(getBooks, "gb") : console.log(null);
 
   const { Books } = getBooks;
   const { result } = searchBooks;
@@ -68,14 +68,20 @@ const Homepage = () => {
       <div className="px-10 max-md:px-4 py-10">
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 4, 900: 5 }}>
           <Masonry>
-            {searchBooks.success
-              ? result.map((book, index) => (
-                  <BookCard key={index} bookData={book} />
-                ))
-              : getBooks.success &&
-                Books.map((book, index) => (
-                  <BookCard key={index} bookData={book} />
-                ))}
+            {searchBooks.success && result.length < 1 ? (
+              <h1 className="max-md:text-xl text-2xl font-bold text-center">
+                Your search results:(0)
+              </h1>
+            ) : searchBooks.success ? (
+              result.map((book, index) => (
+                <BookCard key={index} bookData={book} />
+              ))
+            ) : (
+              getBooks.success &&
+              Books.map((book, index) => (
+                <BookCard key={index} bookData={book} />
+              ))
+            )}
           </Masonry>
         </ResponsiveMasonry>
       </div>
