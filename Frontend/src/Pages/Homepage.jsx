@@ -8,6 +8,7 @@ import { getBooksAction } from "../Redux/Actions/booksAction";
 // import { LOGGED } from "../Redux/Constants";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { searchBooksAction } from "../Redux/Actions/searchAction";
+import Pagination from "../Components/Pagination";
 
 const Homepage = () => {
   const { getBooks, searchBooks } = useSelector((state) => state);
@@ -84,6 +85,8 @@ const Homepage = () => {
             )}
           </Masonry>
         </ResponsiveMasonry>
+        {/*  */}
+        <Pagination />
       </div>
     </div>
   );
