@@ -9,6 +9,7 @@ import { dbConnect } from "./config/db.js";
 import BookRoutes from "../Backend/Routes/Book.js";
 import UserRoutes from "../Backend/Routes/User.js";
 import SearchRoutes from "../Backend/Routes/Search.js";
+import LibRoutes from "../Backend/Routes/library.js";
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use("/books", BookRoutes);
 app.use("/users", UserRoutes);
 app.use("/search", SearchRoutes);
+app.use("/libraries", LibRoutes);
 
 // initial http request from endpoint
 app.get("/", (req, res) => {
