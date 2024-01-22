@@ -73,7 +73,7 @@ const Homepage = () => {
               <h1 className="max-md:text-xl text-2xl font-bold text-center">
                 Your search results:(0)
               </h1>
-            ) : searchBooks.success ? (
+            ) : searchBooks.success && result.length > 0 ? (
               result.map((book, index) => (
                 <BookCard key={index} bookData={book} />
               ))

@@ -20,7 +20,6 @@ const UserSchema = mongoose.Schema(
       default: "regular",
     },
     password: { type: String, required: true },
-    library: { type: mongoose.Schema.Types.ObjectId, ref: "Library" },
   },
   { timestamp: true }
 );

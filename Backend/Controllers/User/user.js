@@ -2,6 +2,7 @@ import UserModel from "../../models/User.js";
 import httpStatus from "http-status";
 import bcrypt from "bcrypt";
 import { jwtToken } from "../../util/generateToken.js";
+import { serialize } from "../../util/serializeUser.js";
 
 export const createUser = async (req, res) => {
   const data = req.body;
@@ -39,7 +40,7 @@ export const createUser = async (req, res) => {
 
     res.status(httpStatus.CREATED).json({
       status: "success",
-      data: newUser,
+      data: serialize(newUser),
     });
   } catch (error) {
     res.status(httpStatus.BAD_REQUEST).json({
@@ -86,7 +87,7 @@ export const loginUser = async (req, res) => {
 
   res.status(httpStatus.OK).json({
     status: "successes",
-    data: userExist,
+    data: serialize(userExist),
     token: jwtToken(userExist._id, userExist.email),
   });
 };

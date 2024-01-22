@@ -21,8 +21,6 @@ const BookSchema = mongoose.Schema(
       enum: ["action", "romance", "horror", "general", "technology"],
       default: "general",
     },
-
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   { timestamp: true }
 );

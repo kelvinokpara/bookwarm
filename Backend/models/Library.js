@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const LibrarySchema = mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
-    books: [{ type: mongoose.Schema.Types.ObjectId, ref: "Book" }],
+    library: [{ type: mongoose.Schema.Types.ObjectId, ref: "Book" }],
   },
   { timestamps: true }
 );
