@@ -13,7 +13,10 @@ import { toast } from "react-toastify";
 
 import axios from "axios";
 
-const backend_base_url = "http://localhost:9000";
+console.log(process.env.NODE_ENV, "lllk22");
+
+const backend_base_url =
+  process.env.NODE_ENV === "production" ? "" : "http://localhost:9000";
 
 export const createBookAction = (BodyData) => async (dispatch, state) => {
   try {

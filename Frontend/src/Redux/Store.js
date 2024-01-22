@@ -5,7 +5,7 @@ import { Reducers } from "./CombinedReducer";
 
 const middlewares = [thunk];
 
-console.log(process.env.NODE_ENV, "lllk");
+// console.log(process.env.NODE_ENV, "lllk");
 
 const setMiddlewares =
   process.env.NODE_ENV === "development"
