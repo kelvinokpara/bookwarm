@@ -5,6 +5,7 @@ import morgan from "morgan";
 import colors from "colors";
 import httpStatus from "http-status";
 import { dbConnect } from "./config/db.js";
+import path from "path";
 
 import BookRoutes from "../Backend/Routes/Book.js";
 import UserRoutes from "../Backend/Routes/User.js";
@@ -24,12 +25,22 @@ app.use("/search", SearchRoutes);
 app.use("/libraries", LibRoutes);
 
 // initial http request from endpoint
-app.get("/", (req, res) => {
-  res.status(httpStatus.OK).json({
-    status: "success",
-    payload: "Server running. Welcome!",
+const __dirname = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "Frontend/dist")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "Frontend", "dist", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.status(httpStatus.OK).json({
+      status: "success",
+      payload: "Server running. Welcome!",
+    });
   });
-});
+}
 
 // req handler to handle deviant links
 app.all("*", (req, res) => {
