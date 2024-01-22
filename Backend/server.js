@@ -50,8 +50,7 @@ app.all("*", (req, res) => {
   });
 });
 
-const port =
-  process.env.NODE_ENV === "production" ? process.env.NODE_ENV : 9000;
+const port = process.env.NODE_ENV === "production" ? process.env.PORT : 9000;
 
 dbConnect()
   .then((res) => {
