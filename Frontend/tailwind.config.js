@@ -6,6 +6,10 @@ export default {
       colors: {
         accent: "#FC4300",
       },
+      fontFamily: {
+        spacemono: "Space Mono, monospace",
+        worksans: "Work Sans, sans-serif",
+      },
     },
   },
   plugins: [],

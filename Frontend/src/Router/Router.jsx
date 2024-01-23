@@ -4,6 +4,7 @@ import Accounts from "../Pages/Accounts";
 import Layout from "../Components/Layouts/Layout";
 import ToastLayout from "../Components/Layouts/ToastLayout";
 import NotFound from "../Pages/NotFound";
+import LibraryPage from "../Pages/LibraryPage";
 
 const Router = () => {
   return (
@@ -22,6 +23,15 @@ const Router = () => {
         element={
           <ToastLayout>
             <Accounts />
+          </ToastLayout>
+        }
+      />
+
+      <Route
+        path={"/libraries"}
+        element={
+          <ToastLayout>
+            <LibraryPage />
           </ToastLayout>
         }
       />

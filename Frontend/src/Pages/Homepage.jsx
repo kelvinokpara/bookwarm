@@ -15,7 +15,7 @@ const Homepage = () => {
   const dispatch = useDispatch();
 
   const userStatus = localStorage.getItem("userInfo");
-  // console.log(userStatus);
+  // console.log(userStatus, "LS status");
 
   useEffect(() => {
     dispatch(getBooksAction());

@@ -1,6 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply max-sm:text-[28px] max-md:text-[30px] text-[67px];
+  }
+  h2 {
+    @apply text-[54px];
+  }
+  h3 {
+    @apply max-sm:text-[20px] max-md:text-[30px] text-[38px];
+  }
+  h4 {
+    @apply text-[28px];
+  }
+  h5 {
+    @apply text-[22px];
+  }
+  p {
+    @apply max-sm:text-sm max-md:text-base text-[22px];
+  }
+}
 
 @layer components {
   .tabsNav {
@@ -15,10 +38,22 @@
   .btn1 {
     @apply grid w-full cursor-pointer select-none rounded-md border border-accent bg-accent py-2 px-5 max-sm:px-3 text-center align-middle text-sm text-white shadow hover:border-accent hover:bg-accent/90 hover:text-white focus:border-accent focus:bg-accent/90 focus:text-white focus:shadow-none trans;
   }
+  .footer_list {
+    @apply text-base text-neutral-400 font-worksans cursor-pointer hover:text-neutral-500 transition-all duration-300;
+  }
+  .footer_list_head {
+    @apply text-[22px] text-white font-bold capitalize font-spacemono;
+  }
+  .px_res {
+    @apply xl:px-10 max-md:px-0 md:px-5;
+  }
+  .px_page {
+    @apply px-0 md:px-10 max-lg:px-[20px];
+  }
 }
 
 /* .grid_res {
-  display: grid;
+  display: grid;  
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 16px;
 } */

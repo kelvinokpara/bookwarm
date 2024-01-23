@@ -7,10 +7,9 @@ export const createLibrary = async (req, res) => {
 
   const libExist = await LibraryModel.findOne({ user: libUser });
 
-  console.log(libExist, "liiiiiiiiibb");
   if (libExist) {
-    res.status(httpStatus.BAD_REQUEST).json({
-      status: "error",
+    res.status(httpStatus.OK).json({
+      status: "success",
       data: "user already has a library.",
     });
     return;
@@ -19,13 +18,6 @@ export const createLibrary = async (req, res) => {
   const newLibrary = await LibraryModel.create({
     user: libUser,
   });
-
-  // const newLib = new LibraryModel({
-  //   user: libUser,
-  //   library: [],
-  // });
-
-  // const savedLib = newLib.save();
 
   res.status(httpStatus.CREATED).json({
     status: "success",
@@ -89,7 +81,10 @@ export const decrementLibrary = async (req, res) => {
 export const getUserLibrary = async (req, res) => {
   const libUser = req.params.user;
 
-  const libDoc = await LibraryModel.findOne({ user: libUser }).populate("");
+  const libDoc = await LibraryModel.findOne({ user: libUser }).populate({
+    path: "library",
+    model: "Book",
+  });
 
   if (!libDoc) {
     res.status(httpStatus.NOT_FOUND).json({
