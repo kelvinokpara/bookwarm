@@ -8,6 +8,8 @@ import { getUserLibrary } from "../../../Backend/Controllers/Library/Library";
 import { useNavigate } from "react-router-dom";
 
 const BookCard = ({ bookData = {}, use }) => {
+  const userLoggedin = localStorage.getItem("userInfo");
+
   const navigate = useNavigate();
 
   const removeBookHandler = () => {
@@ -50,7 +52,14 @@ const BookCard = ({ bookData = {}, use }) => {
             </div>
           ) : (
             <div>
-              <button className="btn1" onClick={addBookHandler}>
+              <button
+                className="btn1"
+                onClick={() => {
+                  userLoggedin
+                    ? addBookHandler
+                    : navigate("/accounts/:register");
+                }}
+              >
                 Add to library
               </button>
             </div>

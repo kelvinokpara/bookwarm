@@ -30,9 +30,9 @@ const Router = () => {
       <Route
         path={"/libraries"}
         element={
-          <ToastLayout>
+          <Layout>
             <LibraryPage />
-          </ToastLayout>
+          </Layout>
         }
       />
 
