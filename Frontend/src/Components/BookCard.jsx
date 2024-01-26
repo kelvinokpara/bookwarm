@@ -1,4 +1,27 @@
-const BookCard = ({ bookData = {} }) => {
+import { useDispatch } from "react-redux";
+import {
+  decrementLibrary,
+  getUserLibraryAction,
+  incrementLibrary,
+} from "../Redux/Actions/libraryAction";
+import { getUserLibrary } from "../../../Backend/Controllers/Library/Library";
+import { useNavigate } from "react-router-dom";
+
+const BookCard = ({ bookData = {}, use }) => {
+  const navigate = useNavigate();
+
+  const removeBookHandler = () => {
+    dispatch(decrementLibrary(bookData._id));
+    dispatch(dispatch(getUserLibraryAction()));
+    window.location.reload();
+  };
+
+  const addBookHandler = () => {
+    dispatch(incrementLibrary(bookData._id));
+    dispatch(dispatch(getUserLibraryAction()));
+  };
+
+  const dispatch = useDispatch();
   return (
     <div className="my-3 max-w-[250px]">
       <div className="group cursor mx-2 overflow-hidden rounded-2xl bg-white shadow-xl duration-200 hover:-translate-y-4">
@@ -14,9 +37,24 @@ const BookCard = ({ bookData = {} }) => {
           </h6>
           <p className="text-gray-600 text-xs">{bookData.authors}</p>
 
-          <a href={bookData.url} target="_blank" rel="noreferrer">
-            <button className="btn1">Add to library</button>
-          </a>
+          {/*  */}
+
+          {use === "library" ? (
+            <div className="flex gap-2">
+              <a href={bookData.url} target="_blank" rel="noreferrer">
+                <button className="btn1">Read</button>
+              </a>
+              <button className="btn1" onClick={removeBookHandler}>
+                Delete
+              </button>
+            </div>
+          ) : (
+            <div>
+              <button className="btn1" onClick={addBookHandler}>
+                Add to library
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

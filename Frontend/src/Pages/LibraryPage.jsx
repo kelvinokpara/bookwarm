@@ -7,15 +7,38 @@ import {
   createLibraryAction,
   getUserLibraryAction,
 } from "../Redux/Actions/libraryAction";
+import {
+  DECREMENT_LIBRARY_RESET,
+  INCREMENT_LIBRARY_RESET,
+} from "../Redux/Constants";
 
 const LibraryPage = () => {
   const dispatch = useDispatch();
+
+  const { getLib, incrementLib, decrementLib } = useSelector((state) => state);
+  console.log(getLib.getLibrary.data, "get lib");
+  // const { getLibrary } = getLib;
+
+  const userLibrary = getLib.getLibrary.data?.library;
+
   useEffect(() => {
     dispatch(createLibraryAction());
     dispatch(getUserLibraryAction());
-  }, []);
+    if (incrementLib.success) {
+      dispatch(getUserLibraryAction());
+      dispatch({ type: INCREMENT_LIBRARY_RESET });
+    }
 
-  const { getLib } = useSelector((state) => state);
+    if (decrementLib.success) {
+      dispatch({ type: DECREMENT_LIBRARY_RESET });
+      dispatch(getUserLibraryAction());
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 3000);
+      // window.location.reload();
+    }
+  }, [incrementLib.success, decrementLib.success, dispatch]);
+
   return (
     <div>
       <div className="relative flex px_res md:py-14 py-8 gap-5 max-sm:gap-3 bg-gray-700 overflow-hidden">
@@ -24,7 +47,7 @@ const LibraryPage = () => {
             Your Library
           </h1>
           <p className="font-worksans text-xl max-md:text-base leading-[160%]">
-            Check out top ranking NFT artists on the NFT Marketplace.
+            Check out the various books you've saved in your library.
           </p>
         </div>
         <img
@@ -39,20 +62,17 @@ const LibraryPage = () => {
       <div className="px-10 max-md:px-4 py-10">
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 4, 900: 5 }}>
           <Masonry>
-            {/* {searchBooks.success && result.length < 1 ? (
+            {userLibrary && userLibrary.length < 1 ? (
               <h1 className="max-md:text-xl text-2xl font-bold text-center">
-                Your search results:(0)
+                You have no books in your library
               </h1>
-            ) : searchBooks.success && result.length > 0 ? (
-              result.map((book, index) => (
-                <BookCard key={index} bookData={book} />
+            ) : getLib.success && userLibrary.length > 0 ? (
+              userLibrary.map((book, index) => (
+                <BookCard key={index} bookData={book} use={"library"} />
               ))
             ) : (
-              getBooks.success &&
-              Books.map((book, index) => (
-                <BookCard key={index} bookData={book} />
-              ))
-            )} */}
+              ""
+            )}
           </Masonry>
         </ResponsiveMasonry>
       </div>

@@ -96,7 +96,8 @@ export const incrementLibrary = (BodyData) => async (dispatch, state) => {
       `${backend_base_url}/libraries/inc/${user._id}`,
       { bookId: BodyData }
     );
-    dispatch({ type: INCREMENT_LIBRARY_SUCCESS, payload: data });
+    dispatch({ type: INCREMENT_LIBRARY_SUCCESS, payload: data.data });
+    toast.success("Book successfully added to your library");
   } catch (error) {
     let message =
       error.response && error.response.data.errors
@@ -121,6 +122,7 @@ export const decrementLibrary = (BodyData) => async (dispatch, state) => {
       { bookId: BodyData }
     );
     dispatch({ type: DECREMENT_LIBRARY_SUCCESS, payload: data });
+    toast.success("book successfully removed from library");
   } catch (error) {
     let message =
       error.response && error.response.data.errors
