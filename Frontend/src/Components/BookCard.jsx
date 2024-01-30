@@ -55,9 +55,7 @@ const BookCard = ({ bookData = {}, use }) => {
               <button
                 className="btn1"
                 onClick={() => {
-                  userLoggedin
-                    ? addBookHandler
-                    : navigate("/accounts/:register");
+                  addBookHandler();
                 }}
               >
                 Add to library

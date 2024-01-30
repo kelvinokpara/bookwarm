@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/Icons/Logos/bookwarm_logo.png";
+import { CiUser } from "react-icons/ci";
 
 const Navbar = () => {
   const userLoggedin = localStorage.getItem("userInfo");
@@ -54,7 +55,11 @@ const Navbar = () => {
                 <Link to={"/libraries"}>Library</Link>
               </li>
               <li className="text-gray-600 md:mr-12 hover:text-accent">
-                {userLoggedin && (
+                {userLoggedin ? (
+                  <div className="p-2 rounded-full text-white bg-accent hover:scale-50">
+                    <CiUser />
+                  </div>
+                ) : (
                   <button className="rounded-md border-2 border-accent px-6 py-1 font-medium text-accent transition-colors hover:bg-accent hover:text-white">
                     Login
                   </button>

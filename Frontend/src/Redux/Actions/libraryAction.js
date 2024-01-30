@@ -100,12 +100,12 @@ export const incrementLibrary = (BodyData) => async (dispatch, state) => {
     toast.success("Book successfully added to your library");
   } catch (error) {
     let message =
-      error.response && error.response.data.errors
-        ? error.response.data.errors.join(",")
+      error.response && error.response.data.data
+        ? error.response.data.data
         : error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    console.log(message, "error");
+    console.log(error, "error");
     dispatch({
       type: INCREMENT_LIBRARY_ERROR,
       payload: message,
