@@ -66,7 +66,7 @@ const Homepage = () => {
         <Tabs />
       </div>
       {/*  */}
-      <div className="px-10 max-md:px-4 py-10">
+      <div className="px-10 max-md:px-4 py-10" id="books">
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 4, 900: 5 }}>
           <Masonry>
             {searchBooks.success && result.length < 1 ? (

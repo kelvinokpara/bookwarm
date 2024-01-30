@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/Icons/Logos/bookwarm_logo.png";
-import { CiUser } from "react-icons/ci";
+import { LuUser } from "react-icons/lu";
 
 const Navbar = () => {
   const userLoggedin = localStorage.getItem("userInfo");
@@ -9,7 +9,7 @@ const Navbar = () => {
       <header className="shadow-md">
         <div className="relative flex max-w-screen-xl flex-col max-sm:justify-center overflow-hidden px-4 py-4 md:mx-auto md:flex-row md:items-center">
           <div className="flex items-center whitespace-nowrap text-2xl font-black">
-            <span className="mr-2 text-blue-600">
+            <span className="mr-2">
               <Link to={"/"}>
                 <img
                   src={logo}
@@ -42,10 +42,10 @@ const Navbar = () => {
           </label>
           <nav
             aria-label="Header Navigation"
-            className="peer-checked:mt-8 peer-checked:max-h-56 flex max-h-0 w-full flex-col items-center justify-between overflow-hidden transition-all md:ml-24 md:max-h-full md:flex-row md:items-start"
+            className="peer-checked:mt-8 peer-checked:max-h-56 flex max-h-0 w-full flex-col items-center justify-between overflow-hidden transition-all md:ml-24 md:max-h-full md:flex-row md:items-start font-semibold"
           >
             <ul className="flex flex-row space-x-4 gap-y-2 flex-wrap items-center max-md:justify-center md:ml-auto md:flex-row md:space-y-0">
-              <li className="text-gray-600 md:mr-12 hover:text-accent">
+              <li className="text-gray-600 hover:text-accent">
                 <a href="#">Pricing</a>
               </li>
               <li className="text-gray-600 md:mr-12 hover:text-accent">
@@ -56,8 +56,9 @@ const Navbar = () => {
               </li>
               <li className="text-gray-600 md:mr-12 hover:text-accent">
                 {userLoggedin ? (
-                  <div className="p-2 rounded-full text-white bg-accent hover:scale-50">
-                    <CiUser />
+                  <div className="p-2 rounded-full text-white font-bold bg-accent hover:scale-50">
+                    <LuUser />
+                    {/* <img src="" alt="" /> */}
                   </div>
                 ) : (
                   <button className="rounded-md border-2 border-accent px-6 py-1 font-medium text-accent transition-colors hover:bg-accent hover:text-white">

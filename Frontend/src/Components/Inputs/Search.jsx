@@ -2,9 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchBooksAction } from "../../Redux/Actions/searchAction";
 import { useEffect, useState } from "react";
 import { SEARCH_BOOKS_RESET } from "../../Redux/Constants/searchConstant";
+import { useNavigate } from "react-router";
 
 const Search = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   console.log(searchValue);
 
@@ -48,7 +50,9 @@ const Search = () => {
         <button
           type="submit"
           className="absolute right-0 mr-1 inline-flex h-12 items-center justify-center rounded-lg bg-accent px-10 font-medium text-white focus:ring-4 hover:bg-accent/90 trans"
-          onClick={(e) => searchHandler(e)}
+          onClick={(e) => {
+            searchHandler(e);
+          }}
         >
           Search
         </button>
