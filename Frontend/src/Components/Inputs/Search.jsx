@@ -10,12 +10,6 @@ const Search = () => {
   const [searchValue, setSearchValue] = useState("");
   console.log(searchValue);
 
-  // useEffect(() => {
-  //   if (searchValue == "") {
-  //     dispatch(SEARCH_BOOKS_RESET);
-  //   }
-  // }, [searchValue, dispatch]);
-
   const searchHandler = (e) => {
     e.preventDefault();
 
