@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/Icons/Logos/bookwarm_logo.png";
 import { LuUser } from "react-icons/lu";
+import UserModal from "./Modals/UserModal";
 
 const Navbar = () => {
   const userLoggedin = localStorage.getItem("userInfo");
@@ -56,9 +57,20 @@ const Navbar = () => {
               </li>
               <li className="text-gray-600 md:mr-12 hover:text-accent">
                 {userLoggedin ? (
-                  <div className="p-2 rounded-full text-white font-bold bg-accent hover:scale-50">
-                    <LuUser />
-                    {/* <img src="" alt="" /> */}
+                  <div className="relative p-2 rounded-full text-white bg-accent hover:scale-90 transition-all duration-300">
+                    <p className="font-extrabold">
+                      <LuUser />
+                    </p>
+
+                    {/* user modal here*/}
+                    {/* <div className="absolute bg-red-700">
+                      <UserModal>
+                        {" "}
+                        <button className="rounded-md border-2 border-accent px-6 py-1 font-medium text-accent transition-colors hover:bg-accent hover:text-white">
+                          Logout
+                        </button>
+                      </UserModal>
+                    </div> */}
                   </div>
                 ) : (
                   <button className="rounded-md border-2 border-accent px-6 py-1 font-medium text-accent transition-colors hover:bg-accent hover:text-white">
