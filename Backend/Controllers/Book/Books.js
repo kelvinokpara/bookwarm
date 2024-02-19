@@ -15,7 +15,7 @@ export const createBook = async (req, res) => {
   }
 
   const createdBook = await BookModel.create({
-    id: data.id,
+    isbn: data.id,
     title: data.title,
     subtitle: data.subtitle,
     authors: data.authors,
