@@ -52,9 +52,11 @@ const Navbar = () => {
               <li className="text-gray-600 md:mr-12 hover:text-accent">
                 <a href="#">Features</a>
               </li>
-              <li className="text-gray-600 md:mr-12 hover:text-accent">
-                <Link to={"/libraries"}>Library</Link>
-              </li>
+              {userLoggedin && (
+                <li className="text-gray-600 md:mr-12 hover:text-accent">
+                  <Link to={"/libraries"}>Library</Link>
+                </li>
+              )}
               <li className="text-gray-600 md:mr-12 hover:text-accent">
                 {userLoggedin ? (
                   <div className="relative p-2 rounded-full text-white bg-accent hover:scale-90 transition-all duration-300">
@@ -73,9 +75,11 @@ const Navbar = () => {
                     </div> */}
                   </div>
                 ) : (
-                  <button className="rounded-md border-2 border-accent px-6 py-1 font-medium text-accent transition-colors hover:bg-accent hover:text-white">
-                    Login
-                  </button>
+                  <Link to={"/accounts/:register"}>
+                    <button className="rounded-md border-2 border-accent px-6 py-1 font-medium text-accent transition-colors hover:bg-accent hover:text-white">
+                      Get Started
+                    </button>
+                  </Link>
                 )}
               </li>
             </ul>

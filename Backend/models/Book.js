@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const BookSchema = mongoose.Schema(
   {
+    isbn: { type: String, required: [true, "Please provide ISBN"] },
     title: { type: String, required: [true, "Please provide title"] },
     subtitle: { type: String },
     description: { type: String },

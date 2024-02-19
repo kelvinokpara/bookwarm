@@ -219,7 +219,7 @@ const Form = () => {
             </div>
 
             {id === ":register" ? (
-              <p className="mb-4 text-center">
+              <p className="mb-4 text-center text-base">
                 Already have an account?
                 <span
                   className="cursor-pointer text-accent no-underline hover:text-accent/80 trans"
@@ -230,7 +230,7 @@ const Form = () => {
                 </span>
               </p>
             ) : id === ":login" ? (
-              <p className="mb-4 text-center">
+              <p className="mb-4 text-center text-base">
                 New on Bookwarm?
                 <span
                   className="cursor-pointer text-accent no-underline hover:text-accent/80 trans"

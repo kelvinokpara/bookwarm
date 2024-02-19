@@ -25,10 +25,10 @@ console.log(process.env.NODE_ENV, "llkelw");
 
 const backend_base_url = "http://localhost:9000";
 
-const userJson = localStorage.getItem("userInfo");
-const user = userJson ? JSON.parse(userJson) : null;
+const userInfo = localStorage.getItem("userInfo");
+const user = JSON.parse(userInfo);
 
-// console.log(user);
+console.log(user);
 
 export const createLibraryAction = () => async (dispatch, state) => {
   const config = {
