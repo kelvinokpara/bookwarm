@@ -23,7 +23,7 @@ const Homepage = () => {
   }, []);
   console.log(searchBooks, "SB");
 
-  // getBooks.success ? console.log(getBooks, "gb") : console.log(null);
+  getBooks.success ? console.log(getBooks, "gb") : console.log(null);
 
   const { Books } = getBooks;
   const { result } = searchBooks;

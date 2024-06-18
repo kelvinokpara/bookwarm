@@ -14,7 +14,7 @@ const BookSchema = mongoose.Schema(
     image: { type: String, required: [true, "please provide image url"] },
     url: {
       type: String,
-      required: [true, "please provide image url"],
+      required: [true, "please provide book url"],
       unique: true,
     },
     category: {
