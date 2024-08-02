@@ -14,6 +14,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "client": "npm run dev --prefix Frontend",
+    "backend": "nodemon Backend/server.js",
     "dev": "concurrently \"nodemon ./Backend.server.js\" \"npm run client\""
   },
   "repository": {

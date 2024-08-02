@@ -17,6 +17,7 @@ export const createLibrary = async (req, res) => {
 
   const newLibrary = await LibraryModel.create({
     user: libUser,
+    library: [],
   });
 
   res.status(httpStatus.CREATED).json({

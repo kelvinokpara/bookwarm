@@ -24,6 +24,8 @@ app.use("/users", UserRoutes);
 app.use("/search", SearchRoutes);
 app.use("/libraries", LibRoutes);
 
+const port = process.env.NODE_ENV === "production" ? process.env.PORT : 9000;
+
 // initial http request from endpoint
 const __dirname = path.resolve();
 
@@ -37,7 +39,7 @@ if (process.env.NODE_ENV === "production") {
   app.get("/", (req, res) => {
     res.status(httpStatus.OK).json({
       status: "success",
-      payload: "Server running. Welcome!",
+      payload: `Server listening on port: ${port} in ${process.env.NODE_ENV} mode...`,
     });
   });
 }
@@ -49,8 +51,6 @@ app.all("*", (req, res) => {
     payload: "ERROR: Endpoint or payload undefined",
   });
 });
-
-const port = process.env.NODE_ENV === "production" ? process.env.PORT : 9000;
 
 dbConnect()
   .then((res) => {
@@ -65,6 +65,7 @@ dbConnect()
         `Server listening on port: ${port} in ${process.env.NODE_ENV} mode...`
           .bgGreen
       );
+      console.log(path.resolve());
     });
   })
   .catch((err) => {
